@@ -1,18 +1,16 @@
 import React, { createContext, useReducer, useContext } from "react";
-
 const INITIAL_STATE = {
   total: 0,
   items: [],
 };
 
 const CartContext = createContext();
-
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       return {
         ...state,
-        items: state.items.concat(action.payload),
+        items: state.items.concat(action.item),
         total: state.total + 1,
       };
     case "REMOVE_FROM_CART":
@@ -21,7 +19,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         items: state.items.filter((item, i) => i !== action.payload),
         total: state.total - 1,
       };
-
     default:
       throw new Error("Action Type required");
   }

@@ -3,16 +3,15 @@ import "../styles.css";
 import { useCartContext } from "../context/cart_context";
 import { Row, Col, Card, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useProductsContext } from "../context/products_context";
 const URL = "https://fakestoreapi.com/products";
 function ProductsPage() {
-  const [products, setProducts] = useState([]);
-
   const { cart, dispatch } = useCartContext();
-
+  const { products, dispatchProductsAction } = useProductsContext();
   const getProducts = async () => {
     const response = await fetch(URL);
     const products = await response.json();
-    setProducts(products);
+    dispatchProductsAction({ type: "GET_PRODUCTS", products: products });
   };
   useEffect(() => {
     getProducts();
@@ -24,7 +23,7 @@ function ProductsPage() {
           <Link to="/cart">VIEW CART ({cart.total})</Link>
         </span>
         <Row xs={6} md={3}>
-          {products.map((item) => {
+          {products.products.map((item) => {
             const { categoty, description, image, price, title } = item;
             return (
               <div key={title}>
@@ -37,8 +36,10 @@ function ProductsPage() {
                       <Card.Text>$ {price}</Card.Text>
                       <Button
                         variant="primary"
-                        onClick={() =>
-                          dispatch({ type: "ADD_TO_CART", payload: item })
+                        onClick={
+                          () => dispatch({ type: "ADD_TO_CART", item: item })
+                          // thankss....this is where you used the dispatch
+                          //yes, i gett
                         }
                       >
                         Add to Cart
@@ -51,8 +52,8 @@ function ProductsPage() {
           })}
         </Row>
       </Container>
-      {products.length === 0 && (
-        <center style={{ marginTop: "20%" }}>LOADING..</center>
+      {products.isLoading && (
+        <center style={{ marginTop: "20%" }}>LOADING..</center> // explainn
       )}
     </div>
   );
