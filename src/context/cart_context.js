@@ -1,32 +1,42 @@
-import React, { createContext, useReducer, useContext } from "react"
-
-// let create our cart state we want to manage
+import React, { createContext, useReducer, useContext } from "react";
 const INITIAL_STATE = {
-    'total': 0,
-    'items': []
-}
+  total: 0,
+  items: [],
+};
 
-// create our cart context
-const CartContext = createContext(); // this is our cart context
+const CartContext = createContext();
+const cartReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "ADD_TO_CART":
+      return {
+        ...state,
+        items: state.items.concat(action.item),
+        total: state.total + 1,
+      };
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        items: state.items.filter((item, i) => i !== action.payload),
+        total: state.total - 1,
+      };
+    default:
+      throw new Error("Action Type required");
+  }
+};
 
-const cardReducer = (state = INITIAL_STATE, action) => {
-    switch (action.type) {
-        case 'ADD_TO_CART':
-            return { ...state, items: addItemToCart(state.items, action.payload), total: getTotal() }
+export const CartProvider = (props) => {
+  const [cart, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+  return (
+    <CartContext.Provider value={{ cart, dispatch }}>
+      {props.children}
+    </CartContext.Provider>
+  );
+};
 
-        default:
-            throw new Error('Action Type required')
-    }
-}
-
-////////////////  
-//are you there?
-// are are are are are you there? are you there?yesssss
-// okayy bosss
-// no lagging? to github so i'll be fast
-
-const addItemToCart = (cart, item) => {
-    return cart.push(item); // lets just add it for now
-}
-
-const getTotal = (cart) => cart.length;
+export const useCartContext = () => {
+  const context = useContext(CartContext);
+  if (context !== undefined) {
+    return context;
+  }
+  return new Error("Context must be used under a provider");
+};
