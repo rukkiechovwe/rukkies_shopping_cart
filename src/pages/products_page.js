@@ -22,7 +22,7 @@ function ProductsPage() {
         <span>
           <Link to="/cart">VIEW CART ({cart.total})</Link>
         </span>
-        <Row xs={6} md={3}>
+        <Row lg={4} md={3} sm={2} xs={1} >
           {products.products.map((item) => {
             const { categoty, description, image, price, title } = item;
             return (
@@ -38,8 +38,6 @@ function ProductsPage() {
                         variant="primary"
                         onClick={
                           () => dispatch({ type: "ADD_TO_CART", item: item })
-                          // thankss....this is where you used the dispatch
-                          //yes, i gett
                         }
                       >
                         Add to Cart

@@ -1,30 +1,25 @@
 import React from "react";
 import { useCartContext } from "../context/cart_context";
+import { Button, ListGroup } from "react-bootstrap";
 
 function CartPage() {
   const { cart, dispatch } = useCartContext();
   return (
     <div>
       <p>Cart Total: {cart.total}</p>
-      <ul>
+      <ListGroup>
         {cart.items.map((item, i) => {
           const { price, title } = item;
           return (
-            <li key={i}>
+            <ListGroup.Item key={i}>
               {title}: $ {price}
-              <span
-                style={{ color: "red", cursor: "pointer" }}
-                onClick={() =>
-                  dispatch({ type: "REMOVE_FROM_CART", payload: i })
-                }
-              >
-                {" "}
-                "REMOVE"
-              </span>
-            </li>
+              <Button variant="danger" size="sm" style={{ marginLeft: "20px", padding: "2px 5px" }}
+                onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: i })
+                }>REMOVE</Button>
+            </ListGroup.Item>
           );
         })}
-      </ul>
+      </ListGroup>
       {cart.items.length === 0 && <center>CART IS EMPTY</center>}
     </div>
   );
