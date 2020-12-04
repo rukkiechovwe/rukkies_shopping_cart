@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../styles.css";
 import { useCartContext } from "../context/cart_context";
 import { Row, Col, Card, Button, Container } from "react-bootstrap";
@@ -15,7 +15,7 @@ function ProductsPage() {
   };
   useEffect(() => {
     getProducts();
-  }, []);
+  });
   return (
     <div>
       <Container>
@@ -24,12 +24,11 @@ function ProductsPage() {
         </span>
         <Row lg={4} md={3} sm={2} xs={1} >
           {products.products.map((item) => {
-            const { categoty, description, image, price, title } = item;
+            const { categoty, price, title } = item;
             return (
               <div key={title}>
                 <Col>
                   <Card>
-                    {/* <Card.Img variant="top" src={image} className="card-img" /> */}
                     <Card.Body>
                       <Card.Title>{title}</Card.Title>
                       <Card.Text>{categoty}</Card.Text>
