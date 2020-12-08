@@ -26,7 +26,7 @@ function ProductsPage() {
       <Container>
         <Row lg={4} md={3} sm={2} xs={1} >
           {products.products.map((item) => {
-            const { categoty, description, id, image, price, title } = item;
+            const { categoty, image, price, title } = item;
             return (
               <div key={title}>
                 <Col>
