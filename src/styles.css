@@ -1,3 +1,19 @@
+button{
+    border: none;
+    display: block;
+    font-weight: 400;
+    color: inherit;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+img{
+    width: 100%;
+}
 .users{
     display: flex;
     flex-direction: row;
@@ -21,11 +37,92 @@
     border-radius: 50%;
 }
 
+h6{
+    font-size: .8rem;
+    text-align: left;
+}
+.ellipsis{
+    height: 17px;
+    overflow: hidden;
+    width: 180px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .card{
     margin: 20px 0;
     align-items: center;
 }
+.card-body{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+.card-img-wrap{
+    width:100%;
+}
 .card-img{
-    width: 135px;
+    width: 88px;
+    height: 105px;
     margin: 5px 0;
+}
+.cart-btn{
+    padding: 0.2rem .75rem;
+    width: 100%;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.nav{
+    width: 100%;
+    height: 50px;
+    background-color: #006bff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* box-shadow: 0px 1px 8px 0px #00000021; */
+}
+.link{
+    padding: 10px;
+    color: #fff;
+}
+/* loader 2 */
+.loader-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index:99;
+    background-color: #00000045;
+}
+.loader2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+}
+.dot{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background:#006bff;
+}
+.dot-1{
+    animation: flow .5s ease 0s infinite alternate;
+}
+.dot-2{
+    animation: flow .5s ease .2s infinite alternate;
+}
+.dot-3{
+    animation: flow .5s ease .4s infinite alternate;
+}
+.dot-4{
+    animation: flow .5s ease .6s infinite alternate;
+}
+@keyframes flow{
+    0%{opacity: 1;transform: scale(1.2);}
+    100%{opacity: .2;transform: scale(.75);}
 }

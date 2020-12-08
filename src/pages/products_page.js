@@ -18,30 +18,34 @@ function ProductsPage() {
   });
   return (
     <div>
+      <nav className="nav">
+        <Link to="/" className="link">Home</Link>
+        <Link to="/" className="link">Products</Link>
+        <Link to="/cart" className="link">Cart ({cart.total})</Link>
+      </nav>
       <Container>
-        <span>
-          <Link to="/cart">VIEW CART ({cart.total})</Link>
-        </span>
         <Row lg={4} md={3} sm={2} xs={1} >
           {products.products.map((item) => {
-            const { categoty, price, title } = item;
+            const { categoty, description, id, image, price, title } = item;
             return (
               <div key={title}>
                 <Col>
                   <Card>
-                    <Card.Body>
-                      <Card.Title>{title}</Card.Title>
-                      <Card.Text>{categoty}</Card.Text>
+                    <div className="card-body">
+                      <div className="card-img-wrap">
+                        <img src={image} alt={title} className="card-img"></img>
+                      </div>
+                      <h6 className="ellipsis">{title}</h6>
+                      <span className="">{categoty}</span>
                       <Card.Text>$ {price}</Card.Text>
-                      <Button
-                        variant="primary"
+                      <button className="cart-btn"
                         onClick={
                           () => dispatch({ type: "ADD_TO_CART", item: item })
                         }
                       >
-                        Add to Cart
-                      </Button>
-                    </Card.Body>
+                        Buy
+                      </button>
+                    </div>
                   </Card>
                 </Col>
               </div>
@@ -50,7 +54,14 @@ function ProductsPage() {
         </Row>
       </Container>
       {products.isLoading && (
-        <center style={{ marginTop: "20%" }}>LOADING..</center> // explainn
+        <div className="loader-wrapper loader2-wrapper">
+          <div className="loader2">
+            <span className="dot dot-1"></span>
+            <span className="dot dot-2"></span>
+            <span className="dot dot-3"></span>
+            <span className="dot dot-4"></span>
+          </div>
+        </div> // explainn
       )}
     </div>
   );
