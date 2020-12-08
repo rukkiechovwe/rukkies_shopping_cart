@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../styles.css";
 import { useCartContext } from "../context/cart_context";
-import { Row, Col, Card, Button, Container } from "react-bootstrap";
+import { Row, Col, Card, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 const URL = "https://fakestoreapi.com/products";
