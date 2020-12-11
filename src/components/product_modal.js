@@ -4,7 +4,7 @@ import { Col, Card } from "react-bootstrap";
 import { useCartContext } from "../context/cart_context";
 
 function ProductModal({ product, hide }) {
-  const { cart, dispatch } = useCartContext();
+  const { dispatch } = useCartContext();
   return (
     <div className={classes.container}>
       <div className={classes.product}>

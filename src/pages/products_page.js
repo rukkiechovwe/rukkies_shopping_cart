@@ -7,7 +7,7 @@ import ProductModal from "../components/product_modal";
 import NavComponent from "../components/nav_component";
 const URL = "https://fakestoreapi.com/products";
 function ProductsPage() {
-  const { cart, dispatch } = useCartContext();
+  const { cart } = useCartContext();
   const { products, dispatchProductsAction } = useProductsContext();
   const [modal, setModal] = useState(false);
   const [product, setProduct] = useState({});
