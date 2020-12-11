@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles.css";
 import { useCartContext } from "../context/cart_context";
 import { Row, Col, Card, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
+import ProductModal from "../components/product_modal";
+import NavComponent from "../components/nav_component";
 const URL = "https://fakestoreapi.com/products";
 function ProductsPage() {
   const { cart, dispatch } = useCartContext();
   const { products, dispatchProductsAction } = useProductsContext();
+  const [modal, setModal] = useState(false);
+  const [product, setProduct] = useState({});
   const getProducts = async () => {
     const response = await fetch(URL);
     const products = await response.json();
@@ -17,14 +20,10 @@ function ProductsPage() {
     getProducts();
   });
   return (
-    <div>
-      <nav className="nav">
-        <Link to="/" className="link">Home</Link>
-        <Link to="/" className="link">Products</Link>
-        <Link to="/cart" className="link">Cart ({cart.total})</Link>
-      </nav>
+    <div style={{ zIndex: "999" }}>
+      <NavComponent cart={cart} />
       <Container>
-        <Row lg={4} md={3} sm={2} xs={1} >
+        <Row lg={4} md={3} sm={2} xs={1}>
           {products.products.map((item) => {
             const { categoty, image, price, title } = item;
             return (
@@ -38,10 +37,17 @@ function ProductsPage() {
                       <h6 className="ellipsis">{title}</h6>
                       <span className="">{categoty}</span>
                       <Card.Text>$ {price}</Card.Text>
-                      <button className="cart-btn"
-                        onClick={
-                          () => dispatch({ type: "ADD_TO_CART", item: item })
-                        }
+                      <button
+                        className="cart-btn"
+                        onClick={() => {
+                          // 3. when the user clicks on "BUY"
+                          // we're setting our product to the item the user clicked
+                          // 4. Also we're setting our modal to true so that the ProductModal would show
+                          // with the item the user clicked
+
+                          setProduct(item); // set our cart item
+                          setModal(true); // show our modal
+                        }}
                       >
                         Buy
                       </button>
@@ -53,6 +59,7 @@ function ProductsPage() {
           })}
         </Row>
       </Container>
+
       {products.isLoading && (
         <div className="loader-wrapper loader2-wrapper">
           <div className="loader2">
@@ -61,8 +68,12 @@ function ProductsPage() {
             <span className="dot dot-3"></span>
             <span className="dot dot-4"></span>
           </div>
-        </div> // explainn
+        </div>
       )}
+      {/* we want to show the modal if and only if the user clicks on buy 
+      1. our modal is false so the modal wont show 
+      2. our product is empty as well */}
+      {modal && <ProductModal product={product} hide={() => setModal(false)} />}
     </div>
   );
 }
