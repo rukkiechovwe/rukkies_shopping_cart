@@ -1,3 +1,11 @@
+.row-vm{
+	display: flex;
+	flex-direction: row;
+}
+.col-vm{
+	display: flex;
+	flex-direction: column;
+}
 button{
     border: none;
     display: block;
@@ -89,7 +97,7 @@ h6{
     padding: 10px;
     color: #fff;
 }
-/* loader 2 */
+/*============= loader =============*/
 .loader-wrapper{
     display: flex;
     align-items: center;
@@ -125,4 +133,62 @@ h6{
 @keyframes flow{
     0%{opacity: 1;transform: scale(1.2);}
     100%{opacity: .2;transform: scale(.75);}
+}
+
+/*======== login ========*/
+.sign-in,.sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding:20px 15px;
+    color: #333;
+}
+.login-page{
+	width: 340px;
+}
+.login-page form{
+    width: 100%;
+    align-items: center;
+    font-size: 15px;
+}
+.container-login{
+    flex-direction: column-reverse;
+    position: relative;
+}
+.container-login{
+    width: 100%;
+    padding-top: 25px;
+}
+.container-login .label-name{
+	margin-bottom: 7px;
+    font-weight: 600;
+}
+.container-login input{
+    outline: none;
+    background-color: transparent;
+    padding: 8px 10px;
+    border: 2px solid #333;
+    border-radius: 3px;
+    width: 100%;
+}
+.container-login button{
+	background-color:#cecece;
+    padding: 10px;
+    width: 100%;
+    font-weight: 600;
+    color: #333;
+}
+.login-page form .container-login1{
+	width: 100%;
+    padding: 5px 0;
+}
+.login-page form .container-login1 span a{
+	color: #333;
+}
+
+
+@media (max-width: 450px){
+	.login-page {width: 100%;}
+    .login-page form h2{font-size: 18px; text-align: center;}
 }
