@@ -36,7 +36,12 @@ function ProductsPage() {
                       </div>
                       <h6 className="ellipsis">{title}</h6>
                       <span className="">{categoty}</span>
-                      <Card.Text>$ {price}</Card.Text>
+                      <div>
+                        <Card.Text>$ {price}</Card.Text>
+                        <div>
+
+                        </div>
+                      </div>
                       <button
                         className="cart-btn"
                         onClick={() => {

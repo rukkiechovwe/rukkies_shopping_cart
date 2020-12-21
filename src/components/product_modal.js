@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./product_modal.module.css";
+import "./products.css";
 import { Col, Card } from "react-bootstrap";
 import { useCartContext } from "../context/cart_context";
 
@@ -20,7 +21,14 @@ function ProductModal({ product, hide }) {
               </div>
               <h1 className="">{product.title}</h1>
               <span className="">{product.description}</span>
-              <Card.Text>$ {product.price}</Card.Text>
+              <div className="d-row quantity-div">
+                <Card.Text>$ {product.price}</Card.Text>
+                <div className="d-row">
+                  <button className="q-btn">+</button>
+                  <span>0</span>
+                  <button className="q-btn">-</button>
+                </div>
+              </div>
               <button
                 className="cart-btn"
                 onClick={() => dispatch({ type: "ADD_TO_CART", item: product })}
