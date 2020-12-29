@@ -5,6 +5,8 @@ import { Row, Col, Card, Container } from "react-bootstrap";
 import { useProductsContext } from "../context/products_context";
 import ProductModal from "../components/product_modal";
 import NavComponent from "../components/nav_component";
+import ProductClass from "../helpers/product_class"
+
 const URL = "https://fakestoreapi.com/products";
 function ProductsPage() {
   const { cart } = useCartContext();
@@ -24,7 +26,7 @@ function ProductsPage() {
       <NavComponent cart={cart} />
       <Container>
         <Row lg={4} md={3} sm={2} xs={1}>
-          {products.products.map((item) => {
+          {products.products.map(item => {
             const { categoty, image, price, title } = item;
             return (
               <div key={title}>
