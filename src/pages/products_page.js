@@ -27,8 +27,7 @@ function ProductsPage() {
   };
   useEffect(() => {
     getProducts();
-  },
-  );
+  }, [getProducts]);
   return (
     <div style={{ zIndex: "999" }}>
       <NavComponent cart={cart} />
