@@ -25,9 +25,11 @@ function ProductsPage() {
       }),
     });
   };
+
   useEffect(() => {
     getProducts();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div style={{ zIndex: "999" }}>
       <NavComponent cart={cart} />
