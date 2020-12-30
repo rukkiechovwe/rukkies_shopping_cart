@@ -5,7 +5,6 @@ import { Row, Col, Card, Container } from "react-bootstrap";
 import { useProductsContext } from "../context/products_context";
 import ProductModal from "../components/product_modal";
 import NavComponent from "../components/nav_component";
-import ProductClass from "../helpers/product_class"
 
 const URL = "https://fakestoreapi.com/products";
 function ProductsPage() {
@@ -16,17 +15,25 @@ function ProductsPage() {
   const getProducts = async () => {
     const response = await fetch(URL);
     const products = await response.json();
-    dispatchProductsAction({ type: "GET_PRODUCTS", products: products });
+
+    dispatchProductsAction({
+      type: "GET_PRODUCTS",
+      products: products.map((product) => {
+        // so basically, here i used a spread operator to spread the values in [product]
+        // and added a new value [quantity] and returned the new object
+        return { ...product, quantity: 0 };
+      }),
+    });
   };
   useEffect(() => {
     getProducts();
-  });
+  }, []);
   return (
     <div style={{ zIndex: "999" }}>
       <NavComponent cart={cart} />
       <Container>
         <Row lg={4} md={3} sm={2} xs={1}>
-          {products.products.map(item => {
+          {products.products.map((item) => {
             const { categoty, image, price, title } = item;
             return (
               <div key={title}>
@@ -40,9 +47,7 @@ function ProductsPage() {
                       <span className="">{categoty}</span>
                       <div>
                         <Card.Text>$ {price}</Card.Text>
-                        <div>
-
-                        </div>
+                        <div></div>
                       </div>
                       <button
                         className="cart-btn"

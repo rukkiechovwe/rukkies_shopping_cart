@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./product_modal.module.css";
 import "./products.css";
 import { Col, Card } from "react-bootstrap";
 import { useCartContext } from "../context/cart_context";
-
 function ProductModal({ product, hide }) {
   const { dispatch } = useCartContext();
+  const [quantity, setQuantity] = useState(product.quantity);
+
+  //
+  const handleQuantity = (action) => {
+    let q = quantity;
+    switch (action) {
+      case "add":
+        setQuantity(++q);
+        break;
+      case "remove":
+        if (quantity > 0) setQuantity(--q);
+        break;
+      default:
+        break;
+    }
+  };
+  //
   return (
     <div className={classes.container}>
       <div className={classes.product}>
@@ -24,14 +40,28 @@ function ProductModal({ product, hide }) {
               <div className="d-row quantity-div">
                 <Card.Text>$ {product.price}</Card.Text>
                 <div className="d-row">
-                  <button className="q-btn">+</button>
-                  <span>0</span>
-                  <button className="q-btn">-</button>
+                  <button
+                    className="q-btn"
+                    onClick={() => handleQuantity("add")}
+                  >
+                    +
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    className="q-btn"
+                    onClick={() => handleQuantity("remove")}
+                  >
+                    -
+                  </button>
                 </div>
               </div>
               <button
                 className="cart-btn"
-                onClick={() => dispatch({ type: "ADD_TO_CART", item: product })}
+                onClick={() => {
+                  product.quantity = quantity;
+                  dispatch({ type: "ADD_TO_CART", item: product });
+                  hide();
+                }}
               >
                 Add to Cart
               </button>
