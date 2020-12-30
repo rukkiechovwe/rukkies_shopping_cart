@@ -2,7 +2,6 @@ import React from "react";
 import { useCartContext } from "../context/cart_context";
 import { Button, ListGroup } from "react-bootstrap";
 import NavComponent from "../components/nav_component";
-import { Link } from "react-router-dom";
 import "./cart_page.css";
 
 function CartPage() {
@@ -38,6 +37,9 @@ function CartPage() {
             );
           })}
         </ListGroup>
+        <div>
+          
+        </div>
       </div>
       {cart.items.length === 0 && <center>CART IS EMPTY</center>}
     </div>
